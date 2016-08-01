@@ -1,6 +1,6 @@
 {
   "name": "async-subscribe",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Emit events when you call an asynchronous function",
   "main": "index.js",
   "directories": {
