@@ -1,0 +1,35 @@
+{
+  "name": "async-subscribe",
+  "version": "0.0.0",
+  "description": "Emit events when you call an asynchronous function",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "node test/index.js",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/async-subscribe.git"
+  },
+  "keywords": [
+    "async",
+    "function",
+    "events",
+    "emitter",
+    "eventemitter",
+    "observable"
+  ],
+  "author": "Nick Thomas <nichoth@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nichoth/async-subscribe/issues"
+  },
+  "homepage": "https://github.com/nichoth/async-subscribe#readme",
+  "devDependencies": {
+    "tape": "^4.6.0"
+  }
+}
