@@ -16,8 +16,8 @@ var EE = require('events').EventEmitter;
 var emitter = new EE();
 var assert = require('assert');
 
-emitter.on('api', function (resp) {
-    console.log('emits api event', resp);
+emitter.on('myEvent', function (resp) {
+    console.log('emits my event', resp);
 });
 
 emitter.on('asyncStart', function () {
@@ -39,7 +39,7 @@ function myCallback (err, resp) {
     console.log('calls my callback', err, resp);
 }
 
-var callAndEmit = subscribe(emitter, 'api', callAPI);
+var callAndEmit = subscribe(emitter, 'myEvent', callAPI);
 
 // call this the same way as the original function, but now we emit
 // events too
