@@ -2,6 +2,7 @@ var test = require('tape');
 var EE = require('events').EventEmitter;
 var subscribe = require('../');
 var emitter = new EE();
+var errorEmitter = new EE();
 
 test('events', function (t) {
     t.plan(5);
@@ -11,6 +12,10 @@ test('events', function (t) {
             'should pass along args'
         );
         process.nextTick(cb.bind(null, null, { test: 'response' }));
+    }
+
+    function errorFn (opts, cb) {
+        process.nextTick(cb.bind(null, 'error'));
     }
 
     function myCallback (err, resp) {
@@ -25,15 +30,18 @@ test('events', function (t) {
         );
     });
 
+    errorEmitter.on('error', function (err) {
+        t.equal(err, 'error', 'should emit the error event');
+    });
+
     emitter.on('asyncStart', function () {
         t.pass('should emit async start event');
     });
 
-    emitter.on('asyncEnd', function () {
-        t.pass('should emit async end event');
-    });
-
     var newFn = subscribe(emitter, 'test', originalFn);
     newFn({ args: 'example' }, myCallback);
+
+    var errorTest = subscribe(errorEmitter, 'x', errorFn);
+    errorTest();
 });
 

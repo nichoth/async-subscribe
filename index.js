@@ -11,8 +11,10 @@ module.exports = function Emit (emitter, name, fn) {
         fn.apply(null, args.concat(onResp));
 
         function onResp (err, resp) {
-            emitter.emit('asyncEnd');
-            if (err) return cb(err);
+            if (err) {
+                emitter.emit('error', err);
+                return cb(err);
+            }
             emitter.emit(name, resp);
             cb(null, resp);
         }
