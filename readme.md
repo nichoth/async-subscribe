@@ -11,21 +11,21 @@ Emit lifecycle events from an asynchronous function call.
 ## example
 
 ```js
-var subscribe = require('async-subscribe');
+var subscribe = require('../');
 var EE = require('events').EventEmitter;
 var emitter = new EE();
 var assert = require('assert');
 
 emitter.on('myEvent', function (resp) {
-    console.log('emits my event', resp);
+    console.log('emits api event', resp);
 });
 
 emitter.on('asyncStart', function () {
     console.log('emits async start event');
 });
 
-emitter.on('asyncEnd', function () {
-    console.log('emits async end event');
+emitter.on('error', function (err) {
+    console.log('emits error event', err);
 });
 
 function callAPI (opts, cb) {
