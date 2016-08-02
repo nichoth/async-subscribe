@@ -4,7 +4,7 @@ var emitter = new EE();
 var assert = require('assert');
 
 emitter.on('myEvent', function (resp) {
-    console.log('emits api event', resp);
+    console.log('emits my event', resp);
 });
 
 emitter.on('asyncStart', function () {
