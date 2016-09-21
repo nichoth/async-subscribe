@@ -20,8 +20,9 @@ emitter.on('myEvent', function (resp) {
     console.log('emits api event', resp);
 });
 
-emitter.on('asyncStart', function () {
+emitter.on('asyncStart', function (args) {
     console.log('emits async start event');
+    assert.deepEqual(args, { args: 'example' }, 'passes args to listener');
 });
 
 emitter.on('error', function (err) {
