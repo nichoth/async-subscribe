@@ -7,7 +7,7 @@ module.exports = function Emit (emitter, name, fn) {
             cb = function () {};
         }
 
-        emitter.emit('asyncStart');
+        emitter.emit.apply(emitter, ['asyncStart'].concat(args));
         fn.apply(null, args.concat(onResp));
 
         function onResp (err, resp) {

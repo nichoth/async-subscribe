@@ -5,7 +5,7 @@ var emitter = new EE();
 var errorEmitter = new EE();
 
 test('events', function (t) {
-    t.plan(5);
+    t.plan(6);
 
     function originalFn (opts, cb) {
         t.deepEqual(opts, { args: 'example' },
@@ -34,8 +34,10 @@ test('events', function (t) {
         t.equal(err, 'error', 'should emit the error event');
     });
 
-    emitter.on('asyncStart', function () {
+    emitter.on('asyncStart', function (args) {
         t.pass('should emit async start event');
+        t.deepEqual(args, { args: 'example' },
+            'should pass args to asyncStart event listener');
     });
 
     var newFn = subscribe(emitter, 'test', originalFn);
